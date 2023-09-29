@@ -21,9 +21,15 @@ const {
 } = require('discord-api-types/v9');
 const fs = require('fs');
 
+/**
+ * idée :
+ * rappel des sessions de travail 1 jour avant et si ce n'est pas recurrent il est delete de la bdd
+ */
+
+
 module.exports = async(client) => {
     console.log("Bot est prêt !");
-    
+
     // Registering the commands in the client
     const CLIENT_ID = client.user.id;
 
