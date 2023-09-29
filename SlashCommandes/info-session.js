@@ -14,9 +14,9 @@ module.exports = {
         let embed = new MessageEmbed()
             .setTitle("Session")
             .setDescription(`Information de la session : ${sessionData.id}`)
-            .addFields({ name: 'Nom', value: sessionData.nom, inline: true })
-            .addFields({ name: 'Info', value: sessionData.description, inline: true })
-            .addFields({ name: 'Date', value: sessionData.date, inline: true })
+            .addFields({ name: 'Nom', value: sessionData.nom.toString(), inline: true })
+            .addFields({ name: 'Info', value: sessionData.description.toString(), inline: true })
+            .addFields({ name: 'Date', value: sessionData.date.toString(), inline: true })
             .setTimestamp()
             .setColor(interaction.guild.me.displayHexColor);
         interaction.reply({ embeds: [embed] })

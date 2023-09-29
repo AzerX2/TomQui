@@ -25,35 +25,9 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(console.log('Connectée à Mongodb.'));
 const fs = require('fs');
 
-// Commandes
-const commands2 = [];
-client.commands = new Collection();
-
 // Gestion d'erreur
 process.on('unhandledRejection', error => {
     console.error('Unhandled promise rejection:', error);
-});
-
-// handler de commandes
-fs.readdir("./Commandes/", (error, f) => {
-    if (error) console.log(error);
-
-    let commandes = f.filter(f => f.split('.').pop() === 'js');
-    //console.log(commandes)
-    a = "";
-    for (i = 0; i < commandes.length; i++) {
-        a += commandes[i];
-    }
-    fs.writeFileSync("./help.txt", a);
-    if (commandes.length <= 0) return console.log("Aucune commande trouv�e !");
-
-    commandes.forEach((f) => {
-
-        let commande = require(`./Commandes/${f}`);
-        console.log(`${f} commande charg�e !`);
-
-        client.commands.set(commande.help.name, commande);
-    });
 });
 
 // handler d'events

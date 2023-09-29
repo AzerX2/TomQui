@@ -13,7 +13,7 @@ module.exports = {
 
         let embed = new MessageEmbed()
             .setTitle("Demande d'aide")
-            .setDescription(`Demande d'aide de ${interaction.user.username}`)
+            .setDescription(`Demande d'aide de <@${interaction.user.id}>`)
             .addFields({ name: 'Matière', value: matiere, inline: true })
             .addFields({ name: 'Info', value: info, inline: true })
             .setTimestamp()

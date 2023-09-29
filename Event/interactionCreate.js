@@ -8,37 +8,9 @@
  */
 module.exports = async(client, interaction) => {
 
-    //si c'est un modal 
-    if (interaction.isModalSubmit()) {
-        if (interaction.customId == "idmodal") {
-            const txt = interaction.fields.getTextInputValue('idmodalask');
-            interaction.reply({
-                content: `Vous avez bien envoyé : ${txt}`
-            })
-        }
-    }
-    // si c'est un bouton
-    if (interaction.isButton()) {
-        if (interaction.customId == "idbutton") {
-            interaction.reply({
-                content: "Vous avez bien cliqué sur le bouton"
-            })
-        }
-    }
-
-    // si c'est un menu déroulant
-    if (interaction.isSelectMenu()) {
-        if (interaction.customId == "idselect") {
-            const value = interaction.values[0];
-            interaction.reply({
-                content: `Vous avez bien sélectionné : ${value}`
-            })
-        }
-    }
-
     // si c'est une commande
     if (interaction.isCommand()) {
-        const command = client.commands2.get(interaction.commandName);
+        const command = client.commands.get(interaction.commandName);
         if (!command) return;
         try {
             await command.execute(interaction);

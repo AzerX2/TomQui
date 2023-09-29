@@ -32,7 +32,6 @@ module.exports = {
             .setDescription(oneLine `
         Voici quelques informations sur moi !
       `)
-            .addFields({ name: 'Préfixe', value: `\`${prefix}\``, inline: true })
             .addFields({ name: 'Client ID', value: `\`${interaction.client.user.id}\``, inline: true })
             .addFields({ name: 'Tech', value: `\`\`\`asciidoc\n${tech}\`\`\``, inline: true })
             .addFields({ name: 'Uptime', value: `\`\`\`prolog\n${days}, ${hours}, ${minutes}, and ${seconds}\`\`\``, inline: true })
