@@ -1,5 +1,5 @@
-# Pommier
-Bot discord du groupe 2 epita
+# TomQui
+Bot discord du groupe ing epita
 
 ### License
 
