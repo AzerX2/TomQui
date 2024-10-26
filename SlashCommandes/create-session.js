@@ -29,7 +29,7 @@ module.exports = {
         let recurrent = interaction.options.getBoolean('recurrent');
         let description = interaction.options.getString('description');
 
-        let year = "2023"
+        let year = "2024"
         let dateFormated = date.split("-")
         let month = dateFormated[0]
         let day = dateFormated[1]

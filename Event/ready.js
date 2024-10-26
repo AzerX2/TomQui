@@ -13,6 +13,13 @@ const {
 // Si vous souhaitez mettre seulement sur un serveur de test, mettez l'id du serveur dans la variable TEST_GUILD_ID
 let TEST_GUILD_ID = ""
 
+let statutWatch = [
+    "les sessions de travail",
+    "Ristou",
+    "les cours",
+    "les membres de l'Epita",
+]
+
 let TOKEN = process.env.TOKEN
 const {
     REST
@@ -77,7 +84,15 @@ async function checkSession(client) {
 
 module.exports = async(client) => {
     console.log("Bot est prêt !");
-
+    // on va set le statut du bot
+    let i = 0
+    setInterval(function() {
+        client.user.setActivity(statutWatch[i], { type: 'WATCHING' })
+        i++
+        if (i == statutWatch.length) {
+            i = 0
+        }
+    }, 5000)
     // toute les 24h on va check si il y a des sessions à rappeler
     checkSession(client)
     setInterval(function() {
