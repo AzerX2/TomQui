@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('issue')
-        .setDescription('Permet de faire une remonté de problème aux délégués cela peut être un problème de cours ou personnel')
+        .setDescription('Remonte un problème aux délégués')
         .addStringOption(option => option.setName('issue').setDescription('problème rencontré').setRequired(true)),
     async execute(interaction) {
         let issue = interaction.options.getString('issue');
