@@ -1,8 +1,14 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
-const fetch = require('node-fetch');
-const ical = require('ical');
+const fs = require('fs');
 const dayjs = require('dayjs');
+const ical = require('ical');
+
+let fetch;
+
+(async () => {
+    fetch = (await import('node-fetch')).default;
+})();
 
 module.exports = {
     data: new SlashCommandBuilder()
