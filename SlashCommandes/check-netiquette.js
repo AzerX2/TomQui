@@ -11,6 +11,6 @@ module.exports = {
                 .setRequired(true)
         ),
     async execute(interaction) {
-        
+        return interaction.reply('Commande en cours de développement');
     }
 };

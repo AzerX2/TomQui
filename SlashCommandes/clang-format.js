@@ -15,7 +15,7 @@ module.exports = {
         ),
     async execute(interaction) {
         const program = interaction.options.getString('program');
-        const tempFilePath = path.join(__dirname, 'temp_program.cpp');
+        const tempFilePath = path.join(__dirname, 'temp_program.c');
         fs.writeFileSync(tempFilePath, program);
         const clangFormatConfigPath = '.clang-format';
 
@@ -31,7 +31,7 @@ module.exports = {
                     .addField('Détails:', stderr || 'Aucun détail disponible');
             } else {
                 embed.setDescription('Code formaté avec succès :')
-                    .addField('Code formaté:', `\`\`\`cpp\n${stdout}\n\`\`\``);
+                    .addField('Code formaté:', `\`\`\`c\n${stdout}\n\`\`\``);
             }
 
             interaction.reply({ embeds: [embed] });

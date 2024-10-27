@@ -83,7 +83,7 @@ async function checkSession(client) {
 }
 
 module.exports = async(client) => {
-    console.log("Bot est prêt !");
+    console.log("Bot est prêt ! id : " + client.user.id);
     // on va set le statut du bot
     let i = 0
     setInterval(function() {
