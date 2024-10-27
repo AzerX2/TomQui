@@ -16,32 +16,25 @@ module.exports = async(client, interaction) => {
     if (interaction.isModalSubmit()) {
         if (interaction.customId === 'clangFormatModal') {
             const code = interaction.fields.getTextInputValue('codeInput');
-            const tempFilePath = path.join(__dirname, 'temp_program.cpp');
+            const tempFilePath = path.join(__dirname, 'temp_program.c');
             fs.writeFileSync(tempFilePath, code);
-    
-            const clangFormatConfigPath = '/mnt/data/.clang-format';
-    
+            const clangFormatConfigPath = '.clang-format';
+
             exec(`clang-format -style=file -assume-filename=${clangFormatConfigPath} ${tempFilePath}`, (error, stdout, stderr) => {
                 fs.unlinkSync(tempFilePath);
-    
+
                 const embed = new MessageEmbed()
                     .setTitle('Résultat de clang-format')
                     .setColor(error ? 'RED' : 'GREEN');
-    
+
                 if (error) {
                     embed.setDescription('Erreur lors de l\'exécution de clang-format.')
-                        .addFields({
-                            name: 'Détails:',
-                            value: stdout || stderr || 'Aucun détail disponible'
-                        });
+                        .addField('Détails:', stderr || 'Aucun détail disponible');
                 } else {
                     embed.setDescription('Code formaté avec succès :')
-                        .addFields({
-                            name: 'Code formaté :',
-                            value: `\`\`\`cpp\n${stdout}\`\`\``
-                        });
+                        .addField('Code formaté:', `\`\`\`c\n${stdout}\n\`\`\``);
                 }
-    
+
                 interaction.reply({ embeds: [embed] });
             });
         }

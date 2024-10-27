@@ -1,15 +1,11 @@
-const { SlashCommandBuilder, Modal, TextInputComponent, showModal } = require('@discordjs/builders');
-const { MessageActionRow } = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageActionRow, Modal, TextInputComponent } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('clang-format')
         .setDescription('Formatte le programme avec clang-format'),
     async execute(interaction) {
-        const modal = new Modal()
-            .setCustomId('clangFormatModal')
-            .setTitle('Clang Format');
-
         const codeInput = new TextInputComponent()
             .setCustomId('codeInput')
             .setLabel('Entrez le code à formater')
@@ -17,8 +13,12 @@ module.exports = {
             .setPlaceholder('Votre code ici...')
             .setRequired(true);
 
-        const firstActionRow = new MessageActionRow().addComponents(codeInput);
-        modal.addComponents(firstActionRow);
+        const row = new MessageActionRow().addComponents(codeInput);
+
+        const modal = new Modal()
+            .setTitle('Clang Format')
+            .setCustomId('clangFormatModal')
+            .addComponents(row);
 
         await interaction.showModal(modal);
     }
