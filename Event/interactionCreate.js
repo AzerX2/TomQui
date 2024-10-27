@@ -18,7 +18,7 @@ module.exports = async(client, interaction) => {
             const code = interaction.fields.getTextInputValue('codeInput');
             const tempFilePath = path.join(__dirname, 'temp_program.c');
             fs.writeFileSync(tempFilePath, code);
-            const clangFormatConfigPath = '.clang-format';
+            const clangFormatConfigPath = '../.clang-format';
 
             exec(`clang-format -style=file -assume-filename=${clangFormatConfigPath} ${tempFilePath}`, (error, stdout, stderr) => {
                 fs.unlinkSync(tempFilePath);
