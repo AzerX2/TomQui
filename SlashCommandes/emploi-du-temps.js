@@ -22,15 +22,35 @@ module.exports = {
             option.setName('date')
                 .setDescription('Date de l\'emploi du temps (format YYYY-MM-DD)')
                 .setRequired(false)
-        ),
+        )
+        .addIntegerOption(option =>
+            option.setName('groupe')
+                .setDescription('Groupe de l\'emploi du temps')
+                .setRequired(false)
+                ),
     async execute(interaction) {
         const url = 'https://zeus.ionis-it.com/api/group/434/ics/EeMUMBH1j7';
         const dateInput = interaction.options.getString('date');
         const targetDate = dateInput ? dayjs(dateInput) : dayjs().startOf('day');
-
         if (!targetDate.isValid()) {
             return interaction.reply('La date spécifiée est invalide. Utilisez le format YYYY-MM-DD.');
         }
+
+        const groupe = interaction.options.getString('groupe');
+
+        if (groupe) {
+            if (groupe > 3 || groupe < 1) {
+                return interaction.reply('Le groupe spécifié est invalide. Utilisez 1, 2 ou 3.');
+            }
+            if (groupe === 1) {
+                url = 'https://zeus.ionis-it.com/api/group/410/ics/EeMUMBH1j7';
+            } else if (groupe === 2) {
+                url = 'https://zeus.ionis-it.com/api/group/411/ics/EeMUMBH1j7';
+            } else {
+                url = 'https://zeus.ionis-it.com/api/group/412/ics/EeMUMBH1j7';
+            }
+        }
+
 
         try {
             const response = await fetch(url);
