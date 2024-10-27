@@ -30,10 +30,16 @@ module.exports = async(client, interaction) => {
     
                 if (error) {
                     embed.setDescription('Erreur lors de l\'exécution de clang-format.')
-                        .addField('Détails:', stderr || 'Aucun détail disponible');
+                        .addFields({
+                            name: 'Détails:',
+                            value: stdout || stderr || 'Aucun détail disponible'
+                        });
                 } else {
                     embed.setDescription('Code formaté avec succès :')
-                        .addField('Code formaté:', `\`\`\`cpp\n${stdout}\n\`\`\``);
+                        .addFields({
+                            name: 'Code formaté :',
+                            value: `\`\`\`cpp\n${stdout}\`\`\``
+                        });
                 }
     
                 interaction.reply({ embeds: [embed] });
