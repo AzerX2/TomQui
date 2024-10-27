@@ -12,10 +12,7 @@ module.exports = {
         let commands = interaction.client.commands;
 
         let embed = new MessageEmbed()
-            .setTitle({
-                name: "Liste des commandes",
-                icon_url: interaction.guild.me.user.displayAvatarURL()
-            })
+            .setTitle("Liste des commandes")
             .setDescription("Voici la liste des commandes disponibles")
             .setColor(interaction.guild.me.displayHexColor);
 
