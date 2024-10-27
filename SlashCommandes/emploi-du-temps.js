@@ -1,7 +1,12 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc');
+const timezone = require('dayjs/plugin/timezone');
 const ical = require('ical');
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 let fetch;
 
@@ -44,8 +49,8 @@ module.exports = {
                 .setColor('BLUE');
 
             eventsForDate.forEach(event => {
-                const start = dayjs(event.start).format('HH:mm');
-                const end = dayjs(event.end).format('HH:mm');
+                const start = dayjs(event.start).tz('Europe/Paris').format('HH:mm');
+                const end = dayjs(event.end).tz('Europe/Paris').format('HH:mm');
                 embed.addField(event.summary || 'Événement', `${start} - ${end}`, false);
             });
 

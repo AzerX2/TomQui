@@ -30,8 +30,13 @@ const {
 const fs = require('fs');
 
 const cron = require('node-cron');
-const ical = require('ical');
 const dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc');
+const timezone = require('dayjs/plugin/timezone');
+const ical = require('ical');
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 let fetch;
 
@@ -112,33 +117,33 @@ module.exports = async(client) => {
     cron.schedule('0 8 * * *', async () => {
         const channel = await client.channels.fetch('1300074305370980352');
         if (!channel) return;
-
+    
         const url = 'https://zeus.ionis-it.com/api/group/434/ics/EeMUMBH1j7';
-        const today = dayjs().startOf('day');
-
+        const today = dayjs().tz('Europe/Paris').startOf('day');
+    
         try {
             const response = await fetch(url);
             const icsData = await response.text();
             const events = ical.parseICS(icsData);
-
+    
             const todayEvents = Object.values(events).filter(event => 
-                event.start && dayjs(event.start).isSame(today, 'day')
+                event.start && dayjs(event.start).tz('Europe/Paris').isSame(today, 'day')
             );
-
+    
             if (todayEvents.length === 0) {
                 return channel.send('Aucun événement prévu pour aujourd\'hui.');
             }
-
+    
             const embed = new MessageEmbed()
                 .setTitle(`Emploi du temps pour ${today.format('YYYY-MM-DD')}`)
                 .setColor('BLUE');
-
+    
             todayEvents.forEach(event => {
-                const start = dayjs(event.start).format('HH:mm');
-                const end = dayjs(event.end).format('HH:mm');
+                const start = dayjs(event.start).tz('Europe/Paris').format('HH:mm');
+                const end = dayjs(event.end).tz('Europe/Paris').format('HH:mm');
                 embed.addField(event.summary || 'Événement', `${start} - ${end}`, false);
             });
-
+    
             channel.send({ embeds: [embed] });
         } catch (error) {
             console.error('Erreur lors de la récupération de l\'emploi du temps:', error);
