@@ -6,7 +6,40 @@
  * 
  * @description Cette fonction est appelée lorsque un utilisateur intéragit avec un bouton ou un menu déroulant.
  */
+
+const { MessageEmbed } = require('discord.js');
+const fs = require('fs');
+const path = require('path');
+const { exec } = require('child_process');
+
 module.exports = async(client, interaction) => {
+    if (interaction.isModalSubmit()) {
+        if (interaction.customId === 'clangFormatModal') {
+            const code = interaction.fields.getTextInputValue('codeInput');
+            const tempFilePath = path.join(__dirname, 'temp_program.cpp');
+            fs.writeFileSync(tempFilePath, code);
+    
+            const clangFormatConfigPath = '/mnt/data/.clang-format';
+    
+            exec(`clang-format -style=file -assume-filename=${clangFormatConfigPath} ${tempFilePath}`, (error, stdout, stderr) => {
+                fs.unlinkSync(tempFilePath);
+    
+                const embed = new MessageEmbed()
+                    .setTitle('Résultat de clang-format')
+                    .setColor(error ? 'RED' : 'GREEN');
+    
+                if (error) {
+                    embed.setDescription('Erreur lors de l\'exécution de clang-format.')
+                        .addField('Détails:', stderr || 'Aucun détail disponible');
+                } else {
+                    embed.setDescription('Code formaté avec succès :')
+                        .addField('Code formaté:', `\`\`\`cpp\n${stdout}\n\`\`\``);
+                }
+    
+                interaction.reply({ embeds: [embed] });
+            });
+        }
+    }
     if (interaction.isButton()) {
         let sing1 = guildMember.guild.roles.cache.get("1150764722015174787")
         let visiteur = guildMember.guild.roles.cache.get("1150764750641299556")

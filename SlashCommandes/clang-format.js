@@ -1,40 +1,25 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require('discord.js');
-const { exec } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { SlashCommandBuilder, Modal, TextInputComponent, showModal } = require('@discordjs/builders');
+const { MessageActionRow } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('clang-format')
-        .setDescription('Formatte le programme avec clang-format')
-        .addStringOption(option => 
-            option.setName('program')
-                .setDescription('Code source à formater')
-                .setRequired(true)
-        ),
+        .setDescription('Formatte le programme avec clang-format'),
     async execute(interaction) {
-        const program = interaction.options.getString('program');
-        const tempFilePath = path.join(__dirname, 'temp_program.c');
-        fs.writeFileSync(tempFilePath, program);
-        const clangFormatConfigPath = '.clang-format';
+        const modal = new Modal()
+            .setCustomId('clangFormatModal')
+            .setTitle('Clang Format');
 
-        exec(`clang-format -style=file -assume-filename=${clangFormatConfigPath} ${tempFilePath}`, (error, stdout, stderr) => {
-            fs.unlinkSync(tempFilePath);
+        const codeInput = new TextInputComponent()
+            .setCustomId('codeInput')
+            .setLabel('Entrez le code à formater')
+            .setStyle('PARAGRAPH')
+            .setPlaceholder('Votre code ici...')
+            .setRequired(true);
 
-            const embed = new MessageEmbed()
-                .setTitle('Résultat de clang-format')
-                .setColor(error ? 'RED' : 'GREEN');
+        const firstActionRow = new MessageActionRow().addComponents(codeInput);
+        modal.addComponents(firstActionRow);
 
-            if (error) {
-                embed.setDescription('Erreur lors de l\'exécution de clang-format.')
-                    .addField('Détails:', stderr || 'Aucun détail disponible');
-            } else {
-                embed.setDescription('Code formaté avec succès :')
-                    .addField('Code formaté:', `\`\`\`c\n${stdout}\n\`\`\``);
-            }
-
-            interaction.reply({ embeds: [embed] });
-        });
+        await interaction.showModal(modal);
     }
 };
