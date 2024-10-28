@@ -36,7 +36,7 @@ module.exports = {
             return interaction.reply('La date spécifiée est invalide. Utilisez le format YYYY-MM-DD.');
         }
 
-        const groupe = interaction.options.getString('groupe');
+        const groupe = interaction.options.get('groupe');
 
         if (groupe) {
             if (groupe > 3 || groupe < 1) {
