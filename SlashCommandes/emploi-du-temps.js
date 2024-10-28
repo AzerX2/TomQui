@@ -23,7 +23,7 @@ module.exports = {
                 .setDescription('Date de l\'emploi du temps (format YYYY-MM-DD)')
                 .setRequired(false)
         )
-        .addIntegerOption(option =>
+        .addStringOption(option =>
             option.setName('groupe')
                 .setDescription('Groupe de l\'emploi du temps')
                 .setRequired(false)
@@ -36,19 +36,19 @@ module.exports = {
             return interaction.reply('La date spécifiée est invalide. Utilisez le format YYYY-MM-DD.');
         }
 
-        const groupe = interaction.options.get('groupe');
+        const groupe = interaction.options.getString('groupe');
 
         if (groupe) {
-            if (groupe > 3 || groupe < 1) {
-                return interaction.reply('Le groupe spécifié est invalide. Utilisez 1, 2 ou 3.');
-            }
-            if (groupe === 1) {
+            if (groupe === "1") {
                 url = 'https://zeus.ionis-it.com/api/group/410/ics/EeMUMBH1j7';
-            } else if (groupe === 2) {
+            } else if (groupe === "2") {
                 url = 'https://zeus.ionis-it.com/api/group/411/ics/EeMUMBH1j7';
-            } else {
+            } else if (groupe === "3") {
                 url = 'https://zeus.ionis-it.com/api/group/412/ics/EeMUMBH1j7';
+            } else {
+                return interaction.reply('Groupe invalide. Veuillez spécifier un groupe entre 1 et 3.');
             }
+
         }
 
 
