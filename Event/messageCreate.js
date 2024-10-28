@@ -13,6 +13,9 @@ module.exports = async(client, message) => {
     if (message.content.replace(/\s/g, '').toLowerCase().includes('tomqui')) {
         message.reply('Tom père !');
     }
+    if (message.content.replace(/\s/g, '').toLowerCase().includes('quitom')) {
+        message.reply('Tom père !');
+    }
     if (message.content.toLowerCase() === 'salut') {
         message.reply('Salut !');
     }
