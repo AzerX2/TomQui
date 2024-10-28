@@ -69,10 +69,13 @@ module.exports = {
                 .setColor('BLUE');
 
             eventsForDate.forEach(event => {
-                console.log(event);
                 const start = dayjs(event.start).tz('Europe/Paris').format('HH:mm');
                 const end = dayjs(event.end).tz('Europe/Paris').format('HH:mm');
-                embed.addField(event.summary || 'Événement', `${start} - ${end}`, false);
+                embed.addFields({
+                    name: event.summary || 'Événement',
+                    value: event.description == "" ? `${start} - ${end} (${event.location || 'Lieu inconnu'})` : `${start} - ${end} (${event.location || 'Lieu inconnu'})\nDescription : ${event.description}`,
+                    inline: false
+                });
             });
 
             interaction.reply({ embeds: [embed] });

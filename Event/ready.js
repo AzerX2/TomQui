@@ -137,11 +137,15 @@ module.exports = async(client) => {
             const embed = new MessageEmbed()
                 .setTitle(`Emploi du temps pour ${today.format('YYYY-MM-DD')}`)
                 .setColor('BLUE');
-    
+
             todayEvents.forEach(event => {
                 const start = dayjs(event.start).tz('Europe/Paris').format('HH:mm');
                 const end = dayjs(event.end).tz('Europe/Paris').format('HH:mm');
-                embed.addField(event.summary || 'Événement', `${start} - ${end}`, false);
+                embed.addFields({
+                    name: event.summary || 'Événement',
+                    value: event.description == "" ? `${start} - ${end} (${event.location || 'Lieu inconnu'})` : `${start} - ${end} (${event.location || 'Lieu inconnu'})\nDescription : ${event.description}`,
+                    inline: false
+                });
             });
     
             channel.send({ embeds: [embed] });
