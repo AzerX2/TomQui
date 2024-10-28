@@ -19,5 +19,25 @@ module.exports = async(client, message) => {
     if (message.content.toLowerCase() === 'bonjour') {
         message.reply('Bonjour !');
     }
-    
+    if (message.content.toLowerCase() === 'coucou') {
+        message.reply('Coucou !');
+    }
+    if (message.content.toLowerCase() === 'cc') {
+        message.reply('Cc !');
+    }
+    if (message.content.toLowerCase() === 'hello') {
+        message.reply('Hello !');
+    }
+    if (message.content.toLowerCase() === 'yo') {
+        message.reply('Yo !');
+    }
+    if (message.content.toLowerCase() === 't\'es là ?') {
+        message.reply('Oui, je suis là !');
+    }
+    if (message.content.toLowerCase() === 'tu es con ?') {
+        message.reply('Non, je suis un robot !');
+    }
+    if (message.content.toLowerCase() === 'tu es un bot ?') {
+        message.reply('Oui, je suis un bot !');
+    }
 };
