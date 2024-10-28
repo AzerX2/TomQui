@@ -29,7 +29,7 @@ module.exports = {
                 .setRequired(false)
                 ),
     async execute(interaction) {
-        const url = 'https://zeus.ionis-it.com/api/group/434/ics/EeMUMBH1j7';
+        let url = 'https://zeus.ionis-it.com/api/group/434/ics/EeMUMBH1j7';
         const dateInput = interaction.options.getString('date');
         const targetDate = dateInput ? dayjs(dateInput) : dayjs().startOf('day');
         if (!targetDate.isValid()) {
