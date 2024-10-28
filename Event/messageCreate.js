@@ -10,7 +10,14 @@ module.exports = async(client, message) => {
     if (message.content === 'pong') {
         message.reply('ping');
     }
-    if (message.content === 'tom qui ?' || message.content === 'Tom qui ?' || message.content === 'Tom Qui ?') {
+    if (message.content.toLowerCase() === 'tom qui ?') {
         message.reply('Tom père !');
     }
+    if (message.content.toLowerCase() === 'salut') {
+        message.reply('Salut !');
+    }
+    if (message.content.toLowerCase() === 'bonjour') {
+        message.reply('Bonjour !');
+    }
+    
 };

@@ -114,7 +114,7 @@ module.exports = async(client) => {
         checkSession(client)
     }, 86400000)
 
-    cron.schedule('0 8 * * *', async () => {
+    cron.schedule('0 6 * * *', async () => {
         const channel = await client.channels.fetch('1300074305370980352');
         if (!channel) return;
     
