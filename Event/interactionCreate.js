@@ -41,13 +41,15 @@ module.exports = async(client, interaction) => {
     }
     if (interaction.isButton()) {
         //get guild by id : 1150764607628128289
+        // sing1 : 1150764722015174787
+        // visiteur : 1150764750641299556
         let guild = interaction.client.guilds.cache.get("1150764607628128289");
         console.log(guild.members.cache)
         console.log(interaction.user.id)
         let member = await guild.members.fetch(interaction.user.id);
         console.log(member)
-        let sing1 = guild.roles.cache.find(role => role.id === "1150764722015174787")
-        let visiteur = guild.roles.cache.find(role => role.id === "1150764722015174786")
+        let sing1 = await guild.roles.fetch("1150764722015174787")
+        let visiteur = await guild.roles.fetch("1150764750641299556")
         if (interaction.customId === 'ing1') {
             await member.roles.add(sing1);
             await member.roles.remove(visiteur);
