@@ -40,16 +40,18 @@ module.exports = async(client, interaction) => {
         }
     }
     if (interaction.isButton()) {
-        console.log(interaction)
-        let sing1 = interaction.guild.roles.cache.find(role => role.id === "1150764722015174787")
-        let visiteur = interaction.guild.roles.cache.find(role => role.id === "1150764722015174786")
+        //get guild by id : 1150764607628128289
+        let guild = client.guilds.cache.get(interaction.message.guild.id);
+        let member = guild.members.cache.get(interaction.user.id);
+        let sing1 = guild.roles.cache.find(role => role.id === "1150764722015174787")
+        let visiteur = guild.roles.cache.find(role => role.id === "1150764722015174786")
         if (interaction.customId === 'ing1') {
-            await interaction.member.roles.add(sing1);
-            await interaction.member.roles.remove(visiteur);
+            await member.roles.add(sing1);
+            await member.roles.remove(visiteur);
             await interaction.reply({ content: 'Vous avez bien été ajouté au rôle ing 1', ephemeral: true });
         } else if (interaction.customId === 'visiteur') {
-            await interaction.member.roles.add(visiteur);
-            await interaction.member.roles.remove(sing1);
+            await member.roles.add(visiteur);
+            await member.roles.remove(sing1);
             await interaction.reply({ content: 'Vous avez bien été ajouté au rôle visiteur', ephemeral: true });
         }
     }
