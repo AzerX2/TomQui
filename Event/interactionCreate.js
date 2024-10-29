@@ -44,6 +44,7 @@ module.exports = async(client, interaction) => {
         let sing1 = guild.roles.cache.find(role => role.id === "1150764722015174787")
         let visiteur = guild.roles.cache.find(role => role.id === "1150764722015174786")
         if (interaction.customId === 'ing1') {
+            console.log(interaction.member)
             await interaction.member.roles.add(sing1);
             await interaction.member.roles.remove(visiteur);
             await interaction.reply({ content: 'Vous avez bien été ajouté au rôle ing 1', ephemeral: true });
