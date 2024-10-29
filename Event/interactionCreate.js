@@ -42,9 +42,9 @@ module.exports = async(client, interaction) => {
     if (interaction.isButton()) {
         //get guild by id : 1150764607628128289
         let guild = interaction.client.guilds.cache.get("1150764607628128289");
-        console.log(guild)
+        console.log(guild.members.cache)
         console.log(interaction.user.id)
-        let member = guild.members.cache.find(member => member.id === interaction.user.id);
+        let member = guild.members.cache.get(interaction.user.id);
         console.log(member)
         let sing1 = guild.roles.cache.find(role => role.id === "1150764722015174787")
         let visiteur = guild.roles.cache.find(role => role.id === "1150764722015174786")
