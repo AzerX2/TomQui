@@ -41,8 +41,8 @@ module.exports = async(client, interaction) => {
     }
     if (interaction.isButton()) {
         guild = interaction.guild
-        let sing1 = guild.roles.cache.get("1150764722015174787")
-        let visiteur = guild.roles.cache.get("1150764750641299556")
+        let sing1 = guild.roles.cache.find(role => role.id === "1150764722015174787")
+        let visiteur = guild.roles.cache.find(role => role.id === "1150764722015174786")
         if (interaction.customId === 'ing1') {
             await interaction.member.roles.add(sing1);
             await interaction.member.roles.remove(visiteur);
