@@ -33,7 +33,7 @@ module.exports = async(client, guildMember) => {
             .setTimestamp()
             .setFooter('Epita');
         
-        guildMember.send({ embeds: [embed], components: [row], content: guildMember.guild.id });
+        guildMember.send({ embeds: [embed], components: [row] });
     } catch (error) {
         console.log(error)
     }
