@@ -22,6 +22,8 @@ let diffAnne = [
     'dubosc',
     'hulaingus',
     'al',
+    'hidalgo',
+    'roumanoff',
 ];
 
 module.exports = async(client, message) => {
@@ -41,6 +43,9 @@ module.exports = async(client, message) => {
     }
     if (message.content.replace(/\s/g, '').toLowerCase().includes('anne')) {
         message.reply(diffAnne[Math.floor(Math.random() * diffAnne.length)] + ' !');
+    }
+    if (message.content.replace(/\s/g, '').toLowerCase().includes('pierrequi')) {
+        message.reply('pignouf !');
     }
     if (message.content.toLowerCase() === 'salut') {
         message.reply('Salut !');
