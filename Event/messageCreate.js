@@ -33,7 +33,7 @@ module.exports = async(client, message) => {
         message.reply(difftomqui[Math.floor(Math.random() * difftomqui.length)] + ' !');
     }
     if (message.content.replace(/\s/g, '').toLowerCase().includes('anne')) {
-        message.reply(diffAnne[Math.floor(Math.random() * difftomqui.length)] + ' !');
+        message.reply(diffAnne[Math.floor(Math.random() * diffAnne.length)] + ' !');
     }
     if (message.content.toLowerCase() === 'salut') {
         message.reply('Salut !');
