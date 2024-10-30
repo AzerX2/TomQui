@@ -18,6 +18,10 @@ let difftomqui = [
 let diffAnne = [
     'hulaingus',
     'al',
+    'frank',
+    'dubosc',
+    'hulaingus',
+    'al',
 ];
 
 module.exports = async(client, message) => {
