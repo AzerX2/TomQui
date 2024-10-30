@@ -5,11 +5,14 @@ let difftomqui = [
     'tom fils',
     'tom papa',
     'tom papy',
+    'tom père',
     'tom papi',
     'tom pipi',
     'tom tom',
+    'tom père',
     'tom padre',
     'tom daddy',
+    'tom père',
 ];
 
 let diffAnne = [
