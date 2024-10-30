@@ -1,5 +1,21 @@
 let Discord = require('discord.js');
 
+let difftomqui = [
+    'tom père',
+    'tom fils',
+    'tom papa',
+    'tom papy',
+    'tom papi',
+    'tom pipi',
+    'tom tom',
+    'tom padre',
+    'tom daddy',
+];
+
+let diffAnne = [
+    'hulaingus',
+    'al',
+];
 
 module.exports = async(client, message) => {
     if (message.author.bot) return;
@@ -11,10 +27,13 @@ module.exports = async(client, message) => {
         message.reply('ping');
     }
     if (message.content.replace(/\s/g, '').toLowerCase().includes('tomqui')) {
-        message.reply('Tom père !');
+        message.reply(difftomqui[Math.floor(Math.random() * difftomqui.length)] + ' !');
     }
     if (message.content.replace(/\s/g, '').toLowerCase().includes('quitom')) {
-        message.reply('Tom père !');
+        message.reply(difftomqui[Math.floor(Math.random() * difftomqui.length)] + ' !');
+    }
+    if (message.content.replace(/\s/g, '').toLowerCase().includes('anne')) {
+        message.reply(diffAnne[Math.floor(Math.random() * difftomqui.length)] + ' !');
     }
     if (message.content.toLowerCase() === 'salut') {
         message.reply('Salut !');
