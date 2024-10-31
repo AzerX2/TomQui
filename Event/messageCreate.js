@@ -18,7 +18,6 @@ let difftomqui = [
 let diffAnne = [
     'hulaingus',
     'al',
-    'frank',
     'dubosc',
     'hulaingus',
     'al',
