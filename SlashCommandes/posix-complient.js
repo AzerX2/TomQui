@@ -1,8 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
-const { exec } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { MessageActionRow, Modal, TextInputComponent } = require('discord.js');
+
 
 module.exports = {
     data: new SlashCommandBuilder()
