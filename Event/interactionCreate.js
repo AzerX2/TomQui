@@ -12,6 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
+
 function checkNetiquette(messageText) {
     const errors = [];
 
