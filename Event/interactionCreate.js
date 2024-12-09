@@ -211,7 +211,7 @@ module.exports = async (client, interaction) => {
                         .addField('Code formaté:', `\`\`\`c\n${stdout}\n\`\`\``);
                 }
 
-                interaction.reply({ embeds: [embed] });
+                interaction.reply({ embeds: [embed], ephemeral: true });
             });
         }
         if (interaction.customId === 'posixCompliantModal') {
