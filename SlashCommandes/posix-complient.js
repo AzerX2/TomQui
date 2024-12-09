@@ -7,12 +7,7 @@ const path = require('path');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('posix-compliant')
-        .setDescription('Vérifie si le programme est POSIX-compliant')
-        .addStringOption(option => 
-            option.setName('program')
-                .setDescription('Programme à vérifier')
-                .setRequired(true)
-        ),
+        .setDescription('Vérifie si le programme est POSIX-compliant'),
     async execute(interaction) {
         const codeInput = new TextInputComponent()
             .setCustomId('codeInput')

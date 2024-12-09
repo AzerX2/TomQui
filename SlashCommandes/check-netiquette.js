@@ -4,12 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('check-netiquette')
-        .setDescription('Vérifie que le message respecte la netiquette')
-        .addStringOption(option => 
-            option.setName('message')
-                .setDescription('Message à vérifier')
-                .setRequired(true)
-        ),
+        .setDescription('Vérifie que le message respecte la netiquette'),
     async execute(interaction) {
         const messInput = new TextInputComponent()
             .setCustomId('messInput')
