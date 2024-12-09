@@ -18,6 +18,10 @@ let statutWatch = [
     "Ristou",
     "les cours",
     "les membres de l'Epita",
+    "Epita",
+    "Tom père",
+    "Les ing 1 ne pas dormir",
+    "PA le goat"
 ]
 
 let TOKEN = process.env.TOKEN
