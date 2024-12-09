@@ -14,26 +14,20 @@ module.exports = {
                 .setRequired(true)
         ),
     async execute(interaction) {
-        const program = interaction.options.getString('program');
+        const codeInput = new TextInputComponent()
+            .setCustomId('codeInput')
+            .setLabel('Entrez le code à vérifier')
+            .setStyle('PARAGRAPH')
+            .setPlaceholder('Votre code ici...')
+            .setRequired(true);
 
-        const tempFilePath = path.join(__dirname, 'temp_program.sh');
-        fs.writeFileSync(tempFilePath, program);
+        const row = new MessageActionRow().addComponents(codeInput);
 
-        exec(`checkbashisms ${tempFilePath}`, (error, stdout, stderr) => {
-            fs.unlinkSync(tempFilePath);
+        const modal = new Modal()
+            .setTitle('POSIX Compliant')
+            .setCustomId('posixCompliantModal')
+            .addComponents(row);
 
-            const embed = new MessageEmbed()
-                .setTitle('Vérification POSIX')
-                .setColor(error ? 'RED' : 'GREEN');
-
-            if (error) {
-                embed.setDescription('Le programme n\'est pas POSIX-compliant.')
-                    .addField('Détails:', stdout || stderr || 'Aucun détail disponible');
-            } else {
-                embed.setDescription('Le programme est POSIX-compliant.');
-            }
-
-            interaction.reply({ embeds: [embed] });
-        });
+        await interaction.showModal(modal);
     }
 };
